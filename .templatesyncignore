@@ -1,0 +1,3 @@
+# Profile-specific files that must not be overwritten by upstream template sync
+README.md
+LICENSE
