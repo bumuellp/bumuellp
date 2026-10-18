@@ -1,0 +1,50 @@
+---
+name: Generate Profile Assets
+
+"on":
+    schedule:
+        - cron: "0 0 * * *"
+    workflow_dispatch:
+
+permissions:
+    contents: write
+
+jobs:
+    generate-assets:
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+            - name: Generate Stats Card
+              uses: stats-organization/github-readme-stats-action@2c498845f71017821efaad14293ebc736156ef21 # v2.1.0
+              with:
+                  card: stats
+                  options: username=bumuellp&show_icons=true&theme=github_dark&hide_border=true
+                  path: profile/stats.svg
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Generate Top Languages Card
+              uses: stats-organization/github-readme-stats-action@2c498845f71017821efaad14293ebc736156ef21 # v2.1.0
+              with:
+                  card: top-langs
+                  options: username=bumuellp&layout=compact&theme=github_dark&hide_border=true
+                  path: profile/top-langs.svg
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Generate Contribution Snake
+              uses: Platane/snk@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3.5.0
+              with:
+                  github_user_name: bumuellp
+                  outputs: |
+                      profile/github-contribution-grid-snake.svg
+                      profile/github-contribution-grid-snake-dark.svg?palette=github-dark
+
+            - name: Commit & Push Assets
+              uses: EndBug/add-and-commit@cc9c08ba6c8df3b93a8f2db63e89b98368ae2ae8 # v11.1.1
+              with:
+                  author_name: "github-actions[bot]"
+                  author_email: "github-actions[bot]@users.noreply.github.com"
+                  message: "chore: update profile SVG assets [skip ci]"
+                  add: "profile"

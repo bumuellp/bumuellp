@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 150">
+  <!-- Roter Eis-Körper -->
+  <path d="M 20 80
+           L 20 40
+           A 30 30 0 0 1 80 40
+           L 80 80
+           A 10 10 0 0 1 70 90
+           L 30 90
+           A 10 10 0 0 1 20 80 Z"
+        fill="#E52421" />
+
+  <!-- Blauer Kaugummi-Stiel -->
+  <rect x="42" y="90" width="16" height="45" rx="8" fill="#00A0E5" />
+</svg>
